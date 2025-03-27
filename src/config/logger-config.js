@@ -1,10 +1,10 @@
 const { createLogger, format, transports } = require("winston");
-const { combine, timestamp, label, prettyPrint } = format;
+const { combine, timestamp, label, printf } = format;
 
-const customFormat = printf((level, message, label, timestamp) => {
-  return `${timestamp} : [${label}] : ${level}: ${message}`;
-});
-
+const customFormat = printf(({ level, message, timestamp }) => {
+    return `${timestamp} : ${level}: ${message}`;
+  });
+  
 const logger = createLogger({
   format: combine(
     label({ label: "right meow!" }),
